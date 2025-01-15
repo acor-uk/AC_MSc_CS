@@ -21,7 +21,7 @@ addresses = address_file.readlines(0)
 address_book = {}
 
 for line in addresses:
-    print(line)
+    #print(line.rstrip())
     stripped = line.rstrip()
     if(stripped == headers):
         #print(True)
