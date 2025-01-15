@@ -16,10 +16,12 @@ address_file = open_file()
 
 
 headers = (address_file.readline()).rstrip()
-addresses = address_file.readlines(1)
+addresses = address_file.readlines(0)
 
 address_book = {}
+
 for line in addresses:
+    print(line)
     stripped = line.rstrip()
     if(stripped == headers):
         #print(True)
@@ -27,7 +29,6 @@ for line in addresses:
     else:
         components = line.split(",")
         address = {"Building":components[1],"Street":components[2],"Town":components[3],"Post code": components[4],"Phone":components[5]}
-
         address_book[components[0]] = address
 
 #print(address_book)
@@ -62,9 +63,15 @@ def store_contact(name,address):
     address_file = open("addresses.csv","a")
     print(f"Storing contact {name} ...")
     address_file.write("\n")
-    address_file.write(name)
+    address_file.write(f"name,")
+    count = 0
+    numKeys = len(address)
     for key in address:
-        address_file.write(f"{key},")
+        if(count == numKeys - 1):
+            address_file.write(f"{address[key]}")
+        else:
+            address_file.write(f"{address[key]},")
+        count += 1
     address_file.close()
 
 def new_contact():
