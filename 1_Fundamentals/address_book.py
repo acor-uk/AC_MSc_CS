@@ -1,6 +1,5 @@
 #AddressBook
 
-import csv
 running = True
 
 def open_file():
@@ -9,7 +8,7 @@ def open_file():
     except FileNotFoundError:
         file = open("addresses.csv","w")
         file.close()
-        open_file()
+        return open_file()
     return file
 
 address_file = open_file()
