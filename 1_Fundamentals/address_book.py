@@ -90,12 +90,12 @@ def show_contact():
     list_contacts()
     selection = input("Enter the name of the contact you want to view: ")
     if selection in address_book:
-        print(f"Contact: {selection}")
-        keys = address_book[selection].keys()
+        print(f"Contact: {selection}") # Print the name of the contact
+        keys = address_book[selection].keys() # Get the keys of the contact dictionary
         for key in keys:
-            print(f"{key}: {address_book[selection][key]}")
+            print(f"{key}: {address_book[selection][key]}") # Print the key and value of the contact on a new line
     else:
-        print("Contact not found.")
+        print("Contact not found.") # If the contact is not found, print this message
 
 def main_menu():
     global running
