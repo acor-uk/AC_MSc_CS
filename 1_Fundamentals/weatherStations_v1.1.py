@@ -22,6 +22,7 @@ def writeToFile(data):
         #had real issues here when I tried to parse line as an f-string, but there was different lengths of data in the rows
         #I was getting an index out of range error and it was because the first 7 or 8 rows were shorter than the rest, due to containing information about the station
         tempStr = f"{station},{data[line][0]},{data[line][1]},{data[line][2]},{data[line][3]},{data[line][4]},{data[line][5]},{data[line][6]}\n" #put the station name at the start of each line, but might change this to the long lat later
+        print(tempStr)
         file.write(tempStr) # I have to add the newline character when usinng the write method
     file.close()
 
@@ -35,6 +36,7 @@ def read_file(path):
         file.close()
         return read_file()
     return file
+
 # check for the data folder using relative path
 # will need logic to handle if the folder does not exist and create it
 files = os.listdir("data")
