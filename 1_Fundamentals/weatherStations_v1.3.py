@@ -166,14 +166,46 @@ def selectStation():
 
     return result
 
+def checkStation(target):
+    file = getProcessedData()
+    stationNames = []
+    allStationData = []
+    
+    for line in file:
+        line = line.strip()
+        allStationData.append(line.split(","))
+        stationNames.append(line.split(",")[0])
+    try:    
+        stationNames.pop(0) # remove the headers from the data
+    except IndexError:
+        print("No Data Found. Continuing Import.")
+        return
+
+    allStationData.pop(0) # the first index is from headers, so removing it
+
+    stationSet = set(stationNames) #set creates a set, and so it removes all duplicates, essentially the same as a tuple
+
+    count = 1
+    stations = []
+    for station in stationSet:
+        print(f"{count}: {station}")
+        stations.append(station) #temp list to be able to access the selected station later
+        count+=1
+
+    for station in stations:
+        if target == station:
+            print("Station Already Exists")
+            return True
+
 def addSourceMenu():
     print("============= Add Station Menu ================\n")
     # check for the data folder using relative path
 # will need logic to handle if the folder does not exist and create it
     currentFile = selectFile()
+    #if selectFile returns false then return to main menu
     if currentFile == False:
         return
-
+    # used to process the file data
     fileData = []
 
     for line in currentFile:
@@ -184,6 +216,11 @@ def addSourceMenu():
 
     #print(len(fileData))
     station = fileData[0][0]
+    duplicateStation = checkStation(station)
+    if duplicateStation == True:
+        print("Duplicate Station Found")
+        return
+    
     headerFound = False
     count=0
     while headerFound == False:
