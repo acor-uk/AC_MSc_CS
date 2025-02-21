@@ -11,4 +11,4 @@ salaries.append(26250)
 salaries.append(33500)
 
 for salary in salaries:
-    print("%12.2f" % salary)
+    print("12%.2f" % salary)
